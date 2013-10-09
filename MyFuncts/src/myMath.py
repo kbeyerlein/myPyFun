@@ -19,3 +19,7 @@ def TwoDNormal(x, w, corr=0):
 
 def TwoDNormalArray(shape, mu, sigma, corr=0):
     return np.array([[TwoDNormal(x=np.array([i,j])-mu, w=sigma, corr=corr) for j in range(0,shape[1])]for i in range(0,shape[0])])
+
+def rebin(a, shape):
+    sh = shape[0],a.shape[0]//shape[0],shape[1],a.shape[1]//shape[1]
+    return a.reshape(sh).mean(-1).mean(1)
